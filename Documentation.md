@@ -1,9 +1,11 @@
 ### The Application will consist of a php front end with a node and postgresql backend
 
 ### POSTGRES CONTAINER -sql Database
-- We create the scriot to run during container creation - docker-compose
+- We create the script to run during container creation - docker-compose
 
 ```
+mkdir db
+touch db/Dockerfile
 touch db/init.sql
 ```
 ### Inside init.sql
