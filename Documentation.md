@@ -36,3 +36,31 @@ COPY ./init.sql /docker-entrypoint-initdb.d/
 docker-compose up
 ```
 ### This failed as superuser password wasn't specified.  We must specify -e POSTGRES_PASSWORD=PASSWORD on docker run or use the dangerous POSTGRES_HOST_AUTH_METHOD=trust to allow all connections
+
+### Updated Dockerfile. It is set as an enviroment variable
+
+```
+FROM postgres
+
+ENV POSTGRES_HOST_AUTH_METHOD=trust
+
+COPY ./init.sql /docker-entrypoint-initdb.d/
+```
+
+```
+docker-compose up
+```
+
+
+
+
+To see our inserted data inserted by our init script, we could connect to the container with the shell using the container id
+
+```
+docker container ls
+```
+
+### Then i'll connect to the container using the exec command
+
+```
+docker exec -it <container id>
