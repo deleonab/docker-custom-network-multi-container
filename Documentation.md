@@ -151,4 +151,11 @@ services:
   depends_on  
     - db
 
-    ```
+```
+
+### We shall create the apparel directory containing
+```
+    Dockerfile
+    server.js
+    package.json
+```
