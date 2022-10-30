@@ -65,3 +65,28 @@ docker container ls
 ```
 docker exec -it <container id> bash
 ```
+
+### Now that we are in the container, we can execute our sql script using the psql command with ourdefault postgres user - postgres on our database also called postgres
+
+```
+psql -U postgres postgres
+```
+
+### This will now give us the postgres prompt and we can now interact with our database using sql
+
+```
+SELECT * from apparel;
+```
+
+```
+name
+--------
+Agbada
+Buba
+Ankara
+Lace
+(4 rows)
+```
+
+### Stoprunning container with Control + C
+### Now we have our postgress container at the backend. We shall now set up other containers that can manipulate that data
