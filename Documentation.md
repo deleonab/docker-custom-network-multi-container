@@ -63,4 +63,5 @@ docker container ls
 ### Then i'll connect to the container using the exec command
 
 ```
-docker exec -it <container id>
+docker exec -it <container id> bash
+```
