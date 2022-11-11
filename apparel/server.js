@@ -19,3 +19,4 @@ res.json(response.rows)
 });
 
 app.listen(PORT,HOST);
+console.log(`Running on PORT http://${HOST}:${PORT}`);
