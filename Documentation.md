@@ -159,3 +159,44 @@ services:
     server.js
     package.json
 ```
+
+### In server.js
+
+```
+const express= require('express');
+const { Pool }  = require('pg');
+
+const HOST = '0.0.0.0';
+const PORT = 80;
+
+const app = express();
+
+const pool = new Pool({ user:'postgres', host:'db' });
+
+
+app.get('/',(req,res)=>{
+
+pool.query('SELECT * FROM apparel',(error,response)=>{
+
+res.json(response.rows)
+});
+
+});
+
+app.listen(PORT,HOST);
+console.log(`Running on PORT http://${HOST}:${PORT}`);
+
+```
+
+### Inside package.json for apparel
+
+```
+{
+
+"dependencies":{
+    "express":"^4.16.1",
+    "pg":"^8.8.0"
+}
+
+}
+```
