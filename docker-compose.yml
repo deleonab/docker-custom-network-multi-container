@@ -7,7 +7,7 @@ services:
   apparel:
     build: ./apparel
 
-  volumes:
+    volumes:
     - ./apparel:/app   
-  depends_on:  
+    depends_on:  
     - db
