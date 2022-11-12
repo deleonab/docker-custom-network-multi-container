@@ -8,6 +8,8 @@ services:
     build: ./apparel
 
     volumes:
-    - ./apparel:/app   
+    - ./apparel:/app
+    ports:
+    - 5001:80   
     depends_on:  
     - db
