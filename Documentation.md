@@ -235,4 +235,13 @@ EXPOSE 80
 CMD ["nodemon","server.js"]
 ```
 
+### Run again with the build option
+
+```
+docker-compose up --build
+
+```
+
+
 ![browser 1](./images/browser1.PNG)
+
