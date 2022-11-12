@@ -200,3 +200,39 @@ console.log(`Running on PORT http://${HOST}:${PORT}`);
 
 }
 ```
+
+### Inside Dockerfile for apparel
+```
+FROM node
+WORKDIR /app
+RUN npm -g nodemon
+COPY package.json package.json
+RUN npm install
+COPY . .
+EXPOSE 80
+CMD ["nodemon","server.js"]
+
+```
+```
+docker-compose up
+```
+-
+- error as npm not installed. error in code
+- also node_modules not copied globally
+
+### Dockerfile after edit
+
+```
+
+FROM node
+WORKDIR /app
+RUN npm install -g nodemon
+COPY package.json package.json
+RUN npm install
+RUN mv /app/node_modules /node_modules
+COPY . .
+EXPOSE 80
+CMD ["nodemon","server.js"]
+```
+
+![browser 1](./images/browser1.PNG)
