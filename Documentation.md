@@ -245,3 +245,15 @@ docker-compose up --build
 
 ![browser 1](./images/browser1.PNG)
 
+
+### Now we shall add another container that will be devoted to prices.
+
+- We shall make our prices container containing
+ - dockerfile
+   requirements.txt as flask app (py) instead of package.json
+   app.py
+```
+mkdir prices
+touch prices/app.py
+touch prices/Dockerfile
+```
