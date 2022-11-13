@@ -303,5 +303,61 @@ CMD ["python", "app.py"]
 
 ### I will now update docker-compose.yml with the price build
 
+```
+version: "3"
 
+services:
+  db:
+    build: ./db
+ 
+  apparel:
+    build: ./apparel
 
+    volumes:
+    - ./apparel:/app
+    ports:
+    - 5001:80   
+    depends_on:  
+    - db
+
+  prices:
+    build: ./prices
+    volumes:
+     - ./prices:/app
+    ports:
+     -5002:80
+    depends_on:
+      - apparel
+```
+
+### run docker-compose up again
+
+```
+Attaching to docker-custom-network-multi-container-apparel-1, docker-custom-network-multi-container-db-1, docker-custom-netw
+docker-custom-network-multi-container-db-1       | 
+docker-custom-network-multi-container-db-1       | PostgreSQL Database directory appears to contain a database; Skipping ini
+docker-custom-network-multi-container-db-1       | 
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:13.932 UTC [1] LOG:  starting PostgreSQL 15.1 (Debian 15linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:13.933 UTC [1] LOG:  listening on IPv4 address "0.0.0.0"
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:13.933 UTC [1] LOG:  listening on IPv6 address "::", por
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:13.955 UTC [1] LOG:  listening on Unix socket "/var/run/
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:13.990 UTC [28] LOG:  database system was shut down at 2
+docker-custom-network-multi-container-db-1       | 2022-11-13 11:01:14.029 UTC [1] LOG:  database system is ready to accept 
+docker-custom-network-multi-container-apparel-1  | [nodemon] 2.0.20
+docker-custom-network-multi-container-apparel-1  | [nodemon] to restart at any time, enter `rs`
+docker-custom-network-multi-container-apparel-1  | [nodemon] watching path(s): *.*
+docker-custom-network-multi-container-apparel-1  | [nodemon] watching extensions: js,mjs,json
+docker-custom-network-multi-container-apparel-1  | [nodemon] starting `node server.js`
+docker-custom-network-multi-container-apparel-1  | Running on PORT http://0.0.0.0:80
+docker-custom-network-multi-container-prices-1   |  * Serving Flask app 'app'
+docker-custom-network-multi-container-prices-1   |  * Debug mode: off
+docker-custom-network-multi-container-prices-1   | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+docker-custom-network-multi-container-prices-1   |  * Running on all addresses (0.0.0.0)
+docker-custom-network-multi-container-prices-1   |  * Running on http://127.0.0.1:80
+docker-custom-network-multi-container-prices-1   |  * Running on http://172.18.0.4:80
+```
+
+### In the browser
+localhost:5002
+
+![browser 2](./images/browser2.PNG)
