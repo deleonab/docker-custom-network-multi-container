@@ -282,4 +282,21 @@ if __name__ == '__main__':
 
 ```
 
-### Next we set dependencies in requirements.txt
+### Next we set dependencies in requirements.txt as below
+```
+Flask==2.2.2
+Requests==2.28.1
+```
+
+
+### Dockerfile for prices container
+```
+FROM python
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 80
+CMD ["python", "app.py"]
+
+```
