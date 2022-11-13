@@ -487,3 +487,10 @@ docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PH
 ### browser localhost:5000
 
 ![browser 3](./images/browser3.PNG)
+
+### 4 containers are now running
+- db
+- apparel
+- price
+- site
+
