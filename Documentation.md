@@ -300,3 +300,8 @@ EXPOSE 80
 CMD ["python", "app.py"]
 
 ```
+
+### I will now update docker-compose.yml with the price build
+
+
+
