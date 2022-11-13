@@ -372,3 +372,88 @@ touch site/index.php
 touch site/Dockerfile
 
 ```
+
+### Dockerfile for prices
+```
+FROM php
+WORKDIR /src
+COPY index.php ./
+EXPOSE 80
+CMD ["php","-S","0.0.0.0:80"]
+
+```
+
+### index.php for prices
+
+```
+<html>
+    <head>
+        <title> My Page
+
+        </title>
+    </head>
+    <body>
+        <h1>Apparel Prices</h1>
+
+    <ul>
+        
+    <?php
+        $json = file_get_contents('http://prices')
+        $price_items = json_decode($json)
+        foreach($price_items as $price_item){
+            echo "<li> $price_item->price </li>";
+        }
+    ?>
+    </ul>
+    </body>
+</html>
+```
+
+### Updated docker-compose.yml for all 4 services
+
+```
+version: "3"
+
+services:
+  db:
+    build: ./db
+ 
+  apparel:
+    build: ./apparel
+
+    volumes:
+    - ./apparel:/app
+    ports:
+    - 5001:80   
+    depends_on:  
+    - db
+
+  prices:
+    build: ./prices
+
+    volumes:
+     - ./prices:/app
+    ports:
+     - 5002:80
+    depends_on:
+     - apparel
+
+  site:
+    build: ./site
+
+    ports:
+     - 5000:80
+
+    volumes:
+     - .sites/src
+
+    depends_on:
+     - prices
+      
+```
+
+### Next run docker-compose up to launch our 4 containers
+
+```
+docker-compose up
+```

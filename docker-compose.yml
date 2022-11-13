@@ -23,3 +23,16 @@ services:
      - 5002:80
     depends_on:
      - apparel
+
+  site:
+    build: ./site
+
+    ports:
+     - 5000:80
+
+    volumes:
+     - .sites/src
+
+    depends_on:
+     - prices
+      
