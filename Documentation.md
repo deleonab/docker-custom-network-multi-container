@@ -398,8 +398,8 @@ CMD ["php","-S","0.0.0.0:80"]
     <ul>
         
     <?php
-        $json = file_get_contents('http://prices')
-        $price_items = json_decode($json)
+        $json = file_get_contents('http://prices');
+        $price_items = json_decode($json);
         foreach($price_items as $price_item){
             echo "<li> $price_item->price </li>";
         }
@@ -445,7 +445,7 @@ services:
      - 5000:80
 
     volumes:
-     - .sites/src
+     - ./site:/src
 
     depends_on:
      - prices
@@ -457,3 +457,33 @@ services:
 ```
 docker-compose up
 ```
+
+```
+Attaching to docker-custom-network-multi-container-apparel-1, docker-custom-network-multi-container-db-1, docker-custom-network-multi-container-prices-1, docker-custom-network-multi-container-site-1
+docker-custom-network-multi-container-db-1       | 
+docker-custom-network-multi-container-db-1       | PostgreSQL Database directory appears to contain a database; Skipping initialization
+docker-custom-network-multi-container-db-1       | 
+docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.486 UTC [1] LOG:  starting PostgreSQL 15.1 (Debian 15.1-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.492 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.493 UTC [1] LOG:  listening on IPv6 address "::", port 5432docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.509 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.534 UTC [28] LOG:  database system was shut down at 2022-11-13 16:48:37 UTC
+docker-custom-network-multi-container-db-1       | 2022-11-13 16:53:55.570 UTC [1] LOG:  database system is ready to accept connections
+docker-custom-network-multi-container-apparel-1  | [nodemon] 2.0.20
+docker-custom-network-multi-container-apparel-1  | [nodemon] to restart at any time, enter `rs`
+docker-custom-network-multi-container-apparel-1  | [nodemon] watching path(s): *.*
+docker-custom-network-multi-container-apparel-1  | [nodemon] watching extensions: js,mjs,json
+docker-custom-network-multi-container-apparel-1  | [nodemon] starting `node server.js`
+docker-custom-network-multi-container-apparel-1  | Running on PORT http://0.0.0.0:80
+docker-custom-network-multi-container-prices-1   |  * Serving Flask app 'app'
+docker-custom-network-multi-container-prices-1   |  * Debug mode: off
+docker-custom-network-multi-container-prices-1   | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+docker-custom-network-multi-container-prices-1   |  * Running on all addresses (0.0.0.0)
+docker-custom-network-multi-container-prices-1   |  * Running on http://127.0.0.1:80
+docker-custom-network-multi-container-prices-1   |  * Running on http://172.18.0.4:80
+docker-custom-network-multi-container-prices-1   | Press CTRL+C to quit
+docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PHP 8.1.12 Development Server (http://0.0.0.0:80) started
+```
+
+### browser localhost:5000
+
+![browser 3](./images/browser3.PNG)
