@@ -361,3 +361,14 @@ docker-custom-network-multi-container-prices-1   |  * Running on http://172.18.0
 localhost:5002
 
 ![browser 2](./images/browser2.PNG)
+
+
+### The final container will be a php container.
+- folder called site will contain index.php and Dockerfile
+
+```
+mkdir site
+touch site/index.php
+touch site/Dockerfile
+
+```
