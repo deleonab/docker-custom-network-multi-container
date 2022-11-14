@@ -502,6 +502,12 @@ docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PH
 
 ##### Since all services by default are in the same network and able to communicate with each other, we need to overide this default behaviour.
 
+- I will make a new entry in the docker-compose.yml called networks. Under this will be 2 networks called core and site.
+```
+networks: 
+  core:
+  site:
+```
 
 
 
