@@ -17,5 +17,16 @@
         }
     ?>
     </ul>
+
+    <h1>Apparel Styles</h1>
+    <ul> 
+       <?php
+       $json2 = file_get_contents('http://apparel');
+       $apparel_items = json_decode($json2);
+       foreach($apparel_items as $apparel_item){
+           echo "<li> $apparel_item->name</li>";
+       }
+       ?>
+    </ul>
     </body>
 </html>

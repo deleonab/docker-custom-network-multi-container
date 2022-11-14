@@ -1,6 +1,6 @@
-### The Application will consist of a php front end with a node and postgresql backend
+#### The Application will consist of a php front end with a node and postgresql backend
 
-### POSTGRES CONTAINER -sql Database
+#### POSTGRES CONTAINER -sql Database
 - We create the script to run during container creation - docker-compose
 
 ```
@@ -8,7 +8,7 @@ mkdir db
 touch db/Dockerfile
 touch db/init.sql
 ```
-### Inside init.sql
+#### Inside init.sql
 ```
 CREATE TABLE apparel(
     name character varying(50)
@@ -21,7 +21,7 @@ INSERT INTO apparel (name) VALUES ('Agbada'),
 
 ```
 
-### Next we add the db instruction to the dockerfile
+#### Next we add the db instruction to the dockerfile
 - postgres base image
 - copy the initialisation script to the default entry point postgres folder
 
@@ -30,14 +30,14 @@ FROM postgres
 
 COPY ./init.sql /docker-entrypoint-initdb.d/
 ```
-### run docker-compose up
+#### run docker-compose up
 
 ```
 docker-compose up
 ```
-### This failed as superuser password wasn't specified.  We must specify -e POSTGRES_PASSWORD=PASSWORD on docker run or use the dangerous POSTGRES_HOST_AUTH_METHOD=trust to allow all connections
+#### This failed as superuser password wasn't specified.  We must specify -e POSTGRES_PASSWORD=PASSWORD on docker run or use the dangerous POSTGRES_HOST_AUTH_METHOD=trust to allow all connections
 
-### Updated Dockerfile. It is set as an enviroment variable
+#### Updated Dockerfile. It is set as an enviroment variable
 
 ```
 FROM postgres
@@ -73,19 +73,19 @@ PS C:\Users\deles\Documents\docker-custom-network-multi-container> docker contai
 CONTAINER ID   IMAGE                                      COMMAND                  CREATED         STATUS          PORTS      NAMES      
 886ddbf3581e   docker-custom-network-multi-container_db   "docker-entrypoint.s…"   2 minutes ago   Up 22 seconds   5432/tcp   docker-custom-network-multi-container_db_1
 ```
-### Then i'll connect to the container using the exec command
+#### Then i'll connect to the container using the exec command
 
 ```
 docker exec -it <container id> bash
 ```
 
-### Now that we are in the container, we can execute our sql script using the psql command with ourdefault postgres user - postgres on our database also called postgres
+#### Now that we are in the container, we can execute our sql script using the psql command with ourdefault postgres user - postgres on our database also called postgres
 
 ```
 psql -U postgres postgres
 ```
 
-### This will now give us the postgres prompt and we can now interact with our database using sql
+#### This will now give us the postgres prompt and we can now interact with our database using sql
 
 ```
 SELECT * from apparel;
@@ -109,20 +109,20 @@ postgres=# SELECT * FROM apparel;
 postgres=# 
 ```
 
-### Stoprunning container with Control + C
+#### Stoprunning container with Control + C
 ### Now we have our postgress container at the backend. We shall now set up other containers that can manipulate that data
 
 
-### Let's create 2 more containers
+#### Let's create 2 more containers
 Container 1: Node Express    Serve up Core container Data
 Container 2: Flask Container  Additional items to core data - Enhances core data
 
-### Create container to serve up core data
-### Let's edit the docker-compose.yml file
+#### Create container to serve up core data
+#### Let's edit the docker-compose.yml file
 
-### Create new service (node express) called apparel to get data from database from a /get endpoint
+#### Create new service (node express) called apparel to get data from database from a /get endpoint
 
-### Updated docker-compose.yml
+#### Updated docker-compose.yml
 ```
 version: "3"
 
@@ -134,7 +134,7 @@ services:
     build: ./apparel
 
 ```
-### We create a volume for instant updates and depends on the db service
+#### We create a volume for instant updates and depends on the db service
 
 ```
 version: "3"
@@ -153,14 +153,14 @@ services:
 
 ```
 
-### We shall create the apparel directory containing
+#### We shall create the apparel directory containing
 ```
     Dockerfile
     server.js
     package.json
 ```
 
-### In server.js
+#### In server.js
 
 ```
 const express= require('express');
@@ -188,7 +188,7 @@ console.log(`Running on PORT http://${HOST}:${PORT}`);
 
 ```
 
-### Inside package.json for apparel
+#### Inside package.json for apparel
 
 ```
 {
@@ -201,7 +201,7 @@ console.log(`Running on PORT http://${HOST}:${PORT}`);
 }
 ```
 
-### Inside Dockerfile for apparel
+#### Inside Dockerfile for apparel
 ```
 FROM node
 WORKDIR /app
@@ -220,7 +220,7 @@ docker-compose up
 - error as npm not installed. error in code
 - also node_modules not copied globally
 
-### Dockerfile after edit
+#### Dockerfile after edit
 
 ```
 
@@ -235,7 +235,7 @@ EXPOSE 80
 CMD ["nodemon","server.js"]
 ```
 
-### Run again with the build option
+#### Run again with the build option
 
 ```
 docker-compose up --build
@@ -246,7 +246,7 @@ docker-compose up --build
 ![browser 1](./images/browser1.PNG)
 
 
-### Now we shall add another container that will be devoted to prices.
+#### Now we shall add another container that will be devoted to prices.
 
 - We shall make our prices container containing
  - dockerfile
@@ -259,7 +259,7 @@ touch prices/Dockerfile
 touch requirements.txt
 ```
 
-### In app.py
+#### In app.py
 
 ```
 import json, requests
@@ -282,14 +282,14 @@ if __name__ == '__main__':
 
 ```
 
-### Next we set dependencies in requirements.txt as below
+#### Next we set dependencies in requirements.txt as below
 ```
 Flask==2.2.2
 Requests==2.28.1
 ```
 
 
-### Dockerfile for prices container
+#### Dockerfile for prices container
 ```
 FROM python
 WORKDIR /app
@@ -301,7 +301,7 @@ CMD ["python", "app.py"]
 
 ```
 
-### I will now update docker-compose.yml with the price build
+#### I will now update docker-compose.yml with the price build
 
 ```
 version: "3"
@@ -330,7 +330,7 @@ services:
       - apparel
 ```
 
-### run docker-compose up again
+#### run docker-compose up again
 
 ```
 Attaching to docker-custom-network-multi-container-apparel-1, docker-custom-network-multi-container-db-1, docker-custom-netw
@@ -373,7 +373,7 @@ touch site/Dockerfile
 
 ```
 
-### Dockerfile for prices
+#### Dockerfile for prices
 ```
 FROM php
 WORKDIR /src
@@ -383,7 +383,7 @@ CMD ["php","-S","0.0.0.0:80"]
 
 ```
 
-### index.php for prices
+#### index.php for prices
 
 ```
 <html>
@@ -409,7 +409,7 @@ CMD ["php","-S","0.0.0.0:80"]
 </html>
 ```
 
-### Updated docker-compose.yml for all 4 services
+#### Updated docker-compose.yml for all 4 services
 
 ```
 version: "3"
@@ -452,7 +452,7 @@ services:
       
 ```
 
-### Next run docker-compose up to launch our 4 containers
+#### Next run docker-compose up to launch our 4 containers
 
 ```
 docker-compose up
@@ -484,13 +484,15 @@ docker-custom-network-multi-container-prices-1   | Press CTRL+C to quit
 docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PHP 8.1.12 Development Server (http://0.0.0.0:80) started
 ```
 
-### browser localhost:5000
+#### browser localhost:5000
 
 ![browser 3](./images/browser3.PNG)
 
-### 4 containers are now running
+#### 4 containers are now running
 - db
 - apparel
 - price
 - site
 
+
+####
