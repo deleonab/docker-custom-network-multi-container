@@ -528,6 +528,17 @@ networks:
     driver: bridge
 ```
 
+##### Next, we need to grant access only to networks that need them.
+
+We shall grant access to core to (db,apparel,price)
+We shall grant access to site to (site,price)
+
+
+
+
+
+
+
 
 
 
