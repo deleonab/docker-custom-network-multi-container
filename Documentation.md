@@ -495,4 +495,4 @@ docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PH
 - site
 
 
-####
+####  For security reasons, We do not want the front end to be able to grab information directly from the core apparel container which get its information directly from the database.
