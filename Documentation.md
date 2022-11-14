@@ -496,3 +496,19 @@ docker-custom-network-multi-container-site-1     | [Sun Nov 13 16:54:00 2022] PH
 
 
 ####  For security reasons, We do not want the front end to be able to grab information directly from the core apparel container which get its information directly from the database.
+#### We want it to only be able to access the prices service and its Data.
+
+##### We shall achieve this by setting up 2 custom networks for our application
+
+##### Since all services by default are in the same network and able to communicate with each other, we need to overide this default behaviour.
+
+
+
+
+
+
+
+
+
+
+
