@@ -533,7 +533,62 @@ networks:
 We shall grant access to core to (db,apparel,price)
 We shall grant access to site to (site,price)
 
+```
+version: "3"
 
+networks:
+  site:
+   driver: bridge
+  core:
+   driver: bridge
+
+services:
+  db:
+    build: ./db
+    networks:
+      - core
+ 
+  apparel:
+    build: ./apparel
+
+    volumes:
+      - ./apparel:/app
+    ports:
+      - 5001:80   
+    depends_on:  
+      - db
+    networks:
+      - core
+
+  prices:
+    build: ./prices
+
+    volumes:
+      - ./prices:/app
+    ports:
+      - 5002:80
+    depends_on:
+      - apparel
+    networks:
+      - site
+      - core
+
+  site:
+    build: ./site
+
+    ports:
+      - 5000:80
+
+    volumes:
+      - ./site:/src
+
+    depends_on:
+      - prices
+    networks:
+      - site
+      
+      
+```
 
 
 
