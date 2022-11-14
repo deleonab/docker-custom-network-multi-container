@@ -590,6 +590,13 @@ services:
       
 ```
 
+##### Now I will run docker-compose up
+```
+docker-compose up
+```
+
+![browser 4](./images/browser4.PNG)
+
 
 
 
