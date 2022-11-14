@@ -508,10 +508,17 @@ networks:
   core:
   site:
 ```
+##### Next we specify for each network a driver which defines how it is set up.
 
 
-
-
+```
+networks: 
+  core:
+    driver;
+  site:
+    driver:
+```
+#
 
 
 
