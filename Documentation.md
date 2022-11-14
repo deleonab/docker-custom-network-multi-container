@@ -514,11 +514,19 @@ networks:
 ```
 networks: 
   core:
-    driver;
+    driver: 
   site:
     driver:
 ```
-#
+##### We will use the bridge network type for both network drivers which is dockers default network.
+
+```
+networks: 
+  core:
+    driver: bridge
+  site:
+    driver: bridge
+```
 
 
 
